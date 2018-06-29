@@ -1,0 +1,99 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	Home
+	
+	Links : 	ContactDetail
+					/contacts/{id}/detail
+.				Company
+					/company
+.				ContactEdit
+					/contacts/{id}
+.				
+	
+	Nesteds : 	
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="HomeController">
+	
+	<h1>Home</h1>
+	
+	<!-- SEARCH FORM -->
+	<div class="well">
+	    <form name="form_search" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="email">Email</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.email" class="form-control" name="email" id="email" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="name">Name</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.name" class="form-control" name="name" id="name" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="note">Note</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.note" class="form-control" name="note" id="note" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="phone">Phone</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.phone" class="form-control" name="phone" id="phone" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="surname">Surname</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.surname" class="form-control" name="surname" id="surname" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- TABLE -->
+	<table class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>email</th>
+				<th>name</th>
+				<th>note</th>
+				<th>phone</th>
+				<th>surname</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in list | filter: {  email:search.email,  name:search.name,  note:search.note,  phone:search.phone,  surname:search.surname,  }">
+				<td ng-bind="item._id" ng-link="/home/{{item._id}}"></td>
+				<td ng-bind="item.email"></td>
+				<td ng-bind="item.name"></td>
+				<td ng-bind="item.note"></td>
+				<td ng-bind="item.phone"></td>
+				<td ng-bind="item.surname"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="mb-20" ng-if="list.$resolved && (list | filter :{   email:search.email,  name:search.name,  note:search.note,  phone:search.phone,  surname:search.surname,  }).length == 0">
+        <b>No result found</b>
+    </div>
+
+	<!-- BUTTON -->
+	<button class="btn btn-primary" ng-link="/home/new">New</button>
+	
+</div>

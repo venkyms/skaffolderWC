@@ -1,0 +1,75 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	Company
+	
+	Links : 	CompanyEdit
+					/company/{id}
+.				
+	
+	Nesteds : 	
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="CompanyController">
+	
+	<h1>Company</h1>
+	
+	<!-- SEARCH FORM -->
+	<div class="well">
+	    <form name="form_search" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="address">Address</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.address" class="form-control" name="address" id="address" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="mail">Mail</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.mail" class="form-control" name="mail" id="mail" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="name">Name</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.name" class="form-control" name="name" id="name" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- TABLE -->
+	<table class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>address</th>
+				<th>mail</th>
+				<th>name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in list | filter: {  address:search.address,  mail:search.mail,  name:search.name,  }">
+				<td ng-bind="item._id" ng-link="/company/{{item._id}}"></td>
+				<td ng-bind="item.address"></td>
+				<td ng-bind="item.mail"></td>
+				<td ng-bind="item.name"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="mb-20" ng-if="list.$resolved && (list | filter :{   address:search.address,  mail:search.mail,  name:search.name,  }).length == 0">
+        <b>No result found</b>
+    </div>
+
+	<!-- BUTTON -->
+	<button class="btn btn-primary" ng-link="/company/new">New</button>
+	
+</div>
