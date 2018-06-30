@@ -39,6 +39,18 @@ var app = angular.module('skaffolderWC_App', [
 	.when('/home', {
 	  templateUrl: 'html/Home.html',
 	})
+	.when('/users/:id', {
+	  templateUrl: 'html/UserEdit.html',
+	  resolve: {
+		  user: ["AuthenticationService", function(AuthenticationService) { return AuthenticationService.isAuthenticated(); }]
+	  },
+	})
+	.when('/users', {
+	  templateUrl: 'html/UserList.html',
+	  resolve: {
+		  user: ["AuthenticationService", function(AuthenticationService) { return AuthenticationService.isAuthenticated(); }]
+	  },
+	})
 
 // END - ROUTE
 

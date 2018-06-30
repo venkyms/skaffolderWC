@@ -1,0 +1,75 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	UserList
+	
+	Links : 	UserEdit
+					/users/{id}
+.				
+	
+	Nesteds : 	
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="UserListController">
+	
+	<h1>UserList</h1>
+	
+	<!-- SEARCH FORM -->
+	<div class="well">
+	    <form name="form_search" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="password">Password</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.password" class="form-control" name="password" id="password" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="roles">Roles</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.roles" class="form-control" name="roles" id="roles" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="user">User</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.user" class="form-control" name="user" id="user" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- TABLE -->
+	<table class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>password</th>
+				<th>roles</th>
+				<th>user</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in list | filter: {  password:search.password,  roles:search.roles,  user:search.user,  }">
+				<td ng-bind="item._id" ng-link="/users/{{item._id}}"></td>
+				<td ng-bind="item.password"></td>
+				<td ng-bind="item.roles"></td>
+				<td ng-bind="item.user"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="mb-20" ng-if="list.$resolved && (list | filter :{   password:search.password,  roles:search.roles,  user:search.user,  }).length == 0">
+        <b>No result found</b>
+    </div>
+
+	<!-- BUTTON -->
+	<button class="btn btn-primary" ng-link="/users/new">New</button>
+	
+</div>
